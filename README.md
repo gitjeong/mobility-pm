@@ -1,26 +1,55 @@
 ---
-description: A Guide for API Usage Application.
+description: >-
+  Returns an array of vehicles depending on your current location (latitude,
+  longitude).
 cover: >-
-  https://velog.velcdn.com/images/zxzz45/post/12297208-b1c3-43d2-9eb9-76e73828c1cf/image.png
+  https://file.mk.co.kr/meet/neds/2023/04/image_readtop_2023_290493_16814543415430832.jpg
 coverY: 0
 ---
 
-# 01. API Usage Application Guide
+# \[API-PM-01] Search Nearby Vehicles
 
-1. When requesting access to our API, please ensure that your REQUESTER\_ID is included in the header to verify your eligibility as a user.
-2. To obtain a REQUESTER\_ID, please reach out to the Mobility Integration Services Team at **dev@sample-email.com.**
-3. When requesting a REQUESTER\_ID, please provide a list of the APIs you intend to use, each identified by its unique API code.
-4. Once issued, your REQUESTER\_ID is strictly for use within your organization among your colleagues and should not be shared with others.
-5. In the event that your REQUESTER\_ID is lost or compromised, please notify us immediately so we can invalidate it. A new REQUESTER\_ID will be issued upon request.
-6. You can make use of the API Usage Application Form below:
+API Code: API-PM-01\
+API Name: Search Nearby Vehicles
 
-**API Usage Application Form**
+## API Description
 
-* Name: John Doe
-* Company/Affiliation: Sample Company Inc.
-* Contact: sample@email.com
-* Purpose of Use: Test
-* API Codes:
-  * API-PM-01
-  * API-PM-02
-  * ...
+<mark style="color:green;">`POST`</mark> `/api/pm`
+
+You can search for nearby vehicles based on your current location (latitude, longitude). If you prefer vehicles from a specific PM operator, you can specify the operator, or leave "operatorIds" as null to retrieve vehicles from all operators. Note that this API necessitates your location coordinates (latitude, longitude), which cannot be null.
+
+**Headers**
+
+| Name          | Value                 |
+| ------------- | --------------------- |
+| Content-Type  | `application/json`    |
+| REQUESTER\_ID | `{your-requester-id}` |
+
+**Body**
+
+| Name        | Type      | Description                                                       |
+| ----------- | --------- | ----------------------------------------------------------------- |
+| operatorIds | string\[] | <p>Array of operator IDs <br>(null if you want all operators)</p> |
+| `age`       | number    | Age of the user                                                   |
+
+**Response**
+
+{% tabs %}
+{% tab title="200" %}
+```json
+{
+  "id": 1,
+  "name": "John",
+  "age": 30
+}
+```
+{% endtab %}
+
+{% tab title="400" %}
+```json
+{
+  "error": "Invalid request"
+}
+```
+{% endtab %}
+{% endtabs %}
