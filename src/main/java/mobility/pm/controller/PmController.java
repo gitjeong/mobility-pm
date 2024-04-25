@@ -5,22 +5,25 @@ import mobility.pm.service.PmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import javax.validation.Valid;
+
+@RestController
 @RequestMapping("/api/pm")
+@Validated
 public class PmController {
 
     @Autowired
-    PmService pmService;
+    private PmService pmService;
 
     @PostMapping("")
-    public ResponseEntity<String> searchVehicles(@RequestBody VehicleRequestDto vehicleRequestDto) {
+    public ResponseEntity<String> searchVehicles(@RequestBody @Valid VehicleRequestDto vehicleRequestDto) throws Exception {
 
-        return new ResponseEntity<>("", HttpStatus.OK);
+        return new ResponseEntity<>(String.valueOf(vehicleRequestDto.getLatitude()), HttpStatus.OK);
     }
 }

@@ -7,6 +7,6 @@ import java.io.Serializable;
 @Data
 public class ErrorCodesAndMessagesDto implements Serializable {
 
-    private String errorCode;
-    private String errorMessage;
+    private String code;
+    private String message;
 }

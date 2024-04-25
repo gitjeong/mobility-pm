@@ -1,10 +1,9 @@
 package mobility.pm.dto;
 
 import lombok.Data;
-import mobility.pm.config.ErrorCodesAndMessagesLoader;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Data
@@ -12,9 +11,11 @@ public class VehicleRequestDto implements Serializable {
 
     private String[] operatorIds;
 
-    @NotBlank(message = "")
+    @NotBlank(message = "latitude")
+    @NotNull(message = "latitude")
     private Double latitude;
 
-    @NotBlank(message = "")
+    @NotBlank(message = "longitude")
+    @NotNull(message = "longitude")
     private Double longitude;
 }
